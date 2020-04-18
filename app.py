@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, logging
+from flask import Flask, request, jsonify
 from flask.logging import create_logger
 import logging
 
@@ -13,12 +13,14 @@ clf = joblib.load("./model_data/boston_housing_prediction.joblib")
 
 def get_local_logger():
     """Defines and returns the logger for a local environment"""
-    LOG = create_logger(app)
-    LOG.setLevel(logging.DEBUG)
-    return LOG
+    
+    local_logger = create_logger(app)
+    local_logger.setLevel(logging.DEBUG)
+    return local_logger
     
 def get_production_logger():
     """Defines and returns the logger for the production environment"""
+    
     return logging.getLogger("gunicorn.error")
 
 def scale(payload):
