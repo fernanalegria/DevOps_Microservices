@@ -1,0 +1,18 @@
+[2020-04-18 22:42:37 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-04-18 22:42:37 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2020-04-18 22:42:37 +0000] [1] [INFO] Using worker: gthread
+[2020-04-18 22:42:37 +0000] [8] [INFO] Booting worker with pid: 8
+[2020-04-18 22:42:37 +0000] [9] [INFO] Booting worker with pid: 9
+[2020-04-18 22:43:08 +0000] [9] [INFO] JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2020-04-18 22:43:08 +0000] [9] [INFO] Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2020-04-18 22:43:08 +0000] [9] [INFO] Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2020-04-18 22:43:08 +0000] [9] [INFO] Scaled payload: 
+[[0. 0. 0. 0. 0. 0.]]
+[2020-04-18 22:43:08 +0000] [9] [INFO] Prediction: 
+[20.35373177134412]
+127.0.0.1 - - [18/Apr/2020:22:43:08 +0000] "POST /predict HTTP/1.1" 200 35 "-" "curl/7.58.0"
