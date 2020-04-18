@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, logging
 from flask.logging import create_logger
 import logging
 
@@ -7,11 +7,19 @@ from sklearn.externals import joblib
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
-LOG = create_logger(app)
-LOG.setLevel(logging.INFO)
 
 # load pretrained model as clf
 clf = joblib.load("./model_data/boston_housing_prediction.joblib")
+
+def get_local_logger():
+    """Defines and returns the logger for a local environment"""
+    LOG = create_logger(app)
+    LOG.setLevel(logging.DEBUG)
+    return LOG
+    
+def get_production_logger():
+    """Defines and returns the logger for the production environment"""
+    return logging.getLogger("gunicorn.error")
 
 def scale(payload):
     """Scales Payload"""
@@ -63,10 +71,15 @@ def predict():
     LOG.info(f"Inference payload DataFrame: \n{inference_payload}")
     # scale the input
     scaled_payload = scale(inference_payload)
+    LOG.info(f"Scaled payload: \n{scaled_payload}")
     # get an output prediction from the pretrained model, clf
     prediction = list(clf.predict(scaled_payload))
-    # TO DO:  Log the output prediction value
+    LOG.info(f"Prediction: \n{prediction}")
+    
     return jsonify({'prediction': prediction})
 
-if __name__ == "__main__":
+if __name__ == "__main__": # development server
+    LOG = get_local_logger()
     app.run(host='0.0.0.0', port=8000, debug=True)
+else: #gunicorn
+    LOG = get_production_logger()

@@ -22,4 +22,4 @@ EXPOSE 8000
 # Run app.py at container launch
 CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8000", "--worker-tmp-dir", \
     "/dev/shm", "--workers=2", "--threads=4", "--worker-class=gthread", \
-    "--log-file=-"]
+    "--log-file=-", "--access-logfile=-", "--log-level=info"]
