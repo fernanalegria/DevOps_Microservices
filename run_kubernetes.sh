@@ -7,7 +7,7 @@
 DOCKER_PATH="fernanalegria/boston-housing"
 
 # Step 2:
-# Clean previous deployments
+# Clean up previous deployments
 if [ $(kubectl get pod boston-housing-pod -o jsonpath='{.kind}') ]
   then
     kubectl delete pod boston-housing-pod
