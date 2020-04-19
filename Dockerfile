@@ -15,11 +15,11 @@ RUN pip install --upgrade pip &&\
     pip install --trusted-host pypi.python.org -r requirements.txt
 
 ## Step 4:
-# Expose port 8000
-EXPOSE 8000
+# Expose port 80
+EXPOSE 80
 
 ## Step 5:
 # Run app.py at container launch
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8000", "--worker-tmp-dir", \
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--worker-tmp-dir", \
     "/dev/shm", "--workers=2", "--threads=4", "--worker-class=gthread", \
     "--log-file=-", "--access-logfile=-", "--log-level=info"]

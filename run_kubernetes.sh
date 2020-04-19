@@ -17,7 +17,7 @@ fi
 # Run the Docker Hub container with kubernetes
 kubectl run boston-housing-pod \
     --image=$DOCKER_PATH \
-    --port=8000 \
+    --port=80 \
     --labels app=boston-housing
 
 # Step 4:
@@ -30,4 +30,4 @@ while [ $(kubectl get pod boston-housing-pod -o jsonpath="{.status.phase}") != "
     echo "Deploying Boston housing pod..."
 done
 kubectl get pod boston-housing-pod
-kubectl port-forward boston-housing-pod 8000:8000
+kubectl port-forward boston-housing-pod 8000:80
